@@ -5,33 +5,34 @@
 #                                                     +:+ +:+         +:+      #
 #    By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/03 13:46:20 by linyao            #+#    #+#              #
-#    Updated: 2024/11/03 14:06:04 by linyao           ###   ########.fr        #
+#    Created: 2024/11/04 14:54:13 by linyao            #+#    #+#              #
+#    Updated: 2024/11/04 15:17:04 by linyao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = phonebook
+NAME = account
 CC = g++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+RM = rm -rf
 
 INC_DIR = .
-INC_FILES = $(INC_DIR)/PhoneBook.hpp $(INC_DIR)/Contact.hpp
-SRC = main.cpp PhoneBook.cpp Contact.cpp
+INC = $(INC_DIR)/Account.hpp
+SRC = tests.cpp Account.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-%.o: %.cpp $(INC_FILES)
+	
+%.o:%.cpp $(INC)
 	$(CC) $(CPPFLAGS) -c $< -o $@ -I $(INC_DIR)
 	
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJ)
 	
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
