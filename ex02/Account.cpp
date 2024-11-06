@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:10:52 by linyao            #+#    #+#             */
-/*   Updated: 2024/11/04 15:25:37 by linyao           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:13:22 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,23 @@ int	Account::getNbWithdrawals() {
 }
 
 void Account::_displayTimestamp() {
+	char	buffer[20];
+
+    std::time_t now = std::time(NULL);
+    struct	std::tm *localTime = std::localtime(&now);
+	if (std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S]", localTime))
+		std::cout << buffer;
+	else
+		std::cerr << "Failed to format time" << std::endl;
+}
+
+/*
+void Account::_displayTimestamp() {
     std::time_t now = std::time(nullptr);
     std::tm *localTime = std::localtime(&now);
     std::cout << std::put_time(localTime, "[%Y%m%d_%H%M%S]");
 }
-
+*/
 void	Account::makeDeposit(int deposit) {
     this->_nbDeposits++;
     Account::_displayTimestamp();
@@ -69,6 +81,7 @@ void	Account::makeDeposit(int deposit) {
     Account::_totalNbDeposits++;
     
 }
+
 bool	Account::makeWithdrawal(int withdrawal) {
     Account::_displayTimestamp();
     std::cout << "index:" << this->_accountIndex << ";p_amount:" << Account::checkAmount() << ";withdrawal:";
@@ -84,6 +97,7 @@ bool	Account::makeWithdrawal(int withdrawal) {
     Account::_totalNbWithdrawals++;
     return (true);
 }
+
 int		Account::checkAmount() const {
     return (this->_amount);
 }

@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 12:24:22 by linyao            #+#    #+#             */
-/*   Updated: 2024/11/03 22:02:33 by linyao           ###   ########.fr       */
+/*   Updated: 2024/11/05 11:47:59 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <sstream>
 
 class Contact {
     private:

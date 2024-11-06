@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 18:41:14 by linyao            #+#    #+#             */
-/*   Updated: 2024/11/03 22:50:08 by linyao           ###   ########.fr       */
+/*   Updated: 2024/11/05 11:54:36 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,16 @@ void PhoneBook::printContact(int index) {
     std::cout << "Darkest Secret: " << PhoneBook::contacts[index].getDarkestSecret() << std::endl;
 }
 
+int	PhoneBook::s_to_int(const std::string &str) {
+	std::stringstream ss(str);
+	int num;
+
+	ss >> num;
+	if (ss.fail())
+		throw std::invalid_argument("Invalid integer format: " + str);
+	return (num);
+}
+
 void PhoneBook::search() {
     std::string istr;
     
@@ -117,7 +127,8 @@ void PhoneBook::search() {
         {
             std::cout << "Enter the index of the contact you want to search: ";
             if (std::getline(std::cin, istr) && istr != "" && isNumeric(istr) && \
-                            std::stoi(istr) < totalContacts && std::stoi(istr) >= 0)  
+               						 PhoneBook::s_to_int(istr) < totalContacts && \
+										PhoneBook::s_to_int(istr) >= 0)  
             {
                     break ;
             }                      
@@ -126,7 +137,7 @@ void PhoneBook::search() {
         }
         if (!std::cin.eof())
         {
-            printContact(std::stoi(istr));
+            printContact(PhoneBook::s_to_int(istr));
         }
     }
 }
